@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <title>Diagramas a partir de texto</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link type=‘text/css’ rel=‘stylesheet’ href=‘https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/css/UDStyle.css’
+        media=‘screen’ />
+
+    <script type="text/javascript" src="https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/UDCore.js"></script>
+    <script type="text/javascript" src="https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/UDModules.js"></script>
+
+    <script type="text/javascript">
+        window.onload = function () {
+
+            var classDiagram = new UMLClassDiagram(
+                { id: 'classDiagram', width: 1500, height: 700 }
+            );
+            classDiagram.setName('Modelo PIM')
+
+            var imagen = new UMLClass({ x: 30, y: 120 });
+            var habitacion = new UMLClass({ x: 350, y: 120 });
+            var tipoHabitacion = new UMLClass({ x: 190, y: 350 });
+            var categoriaHabitacion = new UMLClass({ x: 370, y: 490 });
+            var reservacion = new UMLClass({ x: 630, y: 70 });
+            var cliente = new UMLClass({ x: 1100, y: 100 });
+            var tipoCliente = new UMLClass({ x: 1120, y: 320 });
+            var categoriaCliente = new UMLClass({ x: 1195, y: 450 });
+
+            imagen.setName("Imagen");
+            imagen.addAttribute('+nombre:String');
+            imagen.addAttribute('+contenido:String');
+            imagen.addAttribute('+tipo:String');
+            imagen.addOperation('+getNombre():String');
+            imagen.addOperation('+setNombre(nombre:String)');
+            imagen.addOperation('+getContenido():String');
+            imagen.addOperation('+setContenido(contenido:String)');
+            imagen.addOperation('+getTipo():String');
+            imagen.addOperation('+setTipo(tipo:String)');
+
+            habitacion.setName("Habitacion");
+            habitacion.addAttribute('+numero:int');
+            habitacion.addAttribute('+precio:double');
+            habitacion.addAttribute('+estado:String');
+            habitacion.addOperation('+getNumero():int');
+            habitacion.addOperation('+setNumero(numero:int)');
+            habitacion.addOperation('+getPrecio():double');
+            habitacion.addOperation('+setPrecio(precio:double)');
+            habitacion.addOperation('+getEstado():String');
+            habitacion.addOperation('+setEstado(estado:String)');
+
+            tipoHabitacion.setName("TipoHabitacion");
+            tipoHabitacion.addAttribute('+categoriaHabitacion:CategoriaHabitacion');
+            tipoHabitacion.addAttribute('+descripcion:String');
+            tipoHabitacion.addOperation('+getCategoriaHabitacion():CategoriaHabitacion');
+            tipoHabitacion.addOperation('+setCategoriaHabitacion(categoriaHabitacion:CategoriaHabitacion)');
+            tipoHabitacion.addOperation('+getDescripcion():String');
+            tipoHabitacion.addOperation('+setDescripcion(descripcion:String)');
+
+
+            categoriaHabitacion.setName("<<enumeration>>\nCategoriaHabitacion");
+            categoriaHabitacion.addAttribute('SIMPLES');
+            categoriaHabitacion.addAttribute('DOBLES');
+            categoriaHabitacion.addAttribute('MATRIMONIALES');
+
+            cliente.setName("Cliente");
+            cliente.addAttribute('+RUR:String');
+            cliente.addAttribute('+nombres:String');
+            cliente.addAttribute('+apellidos:String');
+            cliente.addAttribute('+fechaNacimiento:Date');
+            cliente.addOperation('+getRUR():String');
+            cliente.addOperation('+setRUR(RUR:String)');
+            cliente.addOperation('+getNombres():String');
+            cliente.addOperation('+setNombres(nombres:String)');
+            cliente.addOperation('+getApellidos():String');
+            cliente.addOperation('+setApellidos(apellidos:String)');
+            cliente.addOperation('+getFechaNacimiento():Date');
+            cliente.addOperation('+setFechaNacimiento(fechaNacimiento:Date)');
+
+            tipoCliente.setName("TipoCliente");
+            tipoCliente.addAttribute('+numero:String');
+            tipoCliente.addAttribute('+porcentajeDescuento:String');
+            tipoCliente.addAttribute('+descripcion:String');
+            tipoCliente.addAttribute('+categoriaCliente: CategoriaCliente');
+
+            categoriaCliente.setName("<<enumeration>>\nCategoriaCliente");
+            categoriaCliente.addAttribute('HABITUALES');
+            categoriaCliente.addAttribute('ESPORADICOS');
+
+            reservacion.setName("Reservacion");
+            reservacion.addAttribute('+fecha:Date');
+            reservacion.addAttribute('+fechaInicio:Date');
+            reservacion.addAttribute('+numeroDias:int');
+            reservacion.addAttribute('+numeroNoches:int');
+            reservacion.addAttribute('+porcentajeDescuento:int');
+            reservacion.addAttribute('+total:double');
+            reservacion.addOperation('+getFecha():Date');
+            reservacion.addOperation('+setFecha(fecha:Date)');
+            reservacion.addOperation('+getFechaInicio():Date');
+            reservacion.addOperation('+setFechaInicio(fechaInicio:Date)');
+            reservacion.addOperation('+getNumeroDias():int');
+            reservacion.addOperation('+setNumeroDias(numeroDias:int)');
+            reservacion.addOperation('+getNumeroNoches():int');
+            reservacion.addOperation('+setNumeroNoches(numeroNoches:int)');
+            reservacion.addOperation('+getPorcentajeDescuento():int');
+            reservacion.addOperation('+setPorcentajeDescuento(porcentajeDescuento:int)');
+            reservacion.addOperation('+getTotal():double');
+            reservacion.addOperation('+setTotal(total:double)');
+
+            classDiagram.addElement(cliente);
+            classDiagram.addElement(tipoCliente);
+            classDiagram.addElement(categoriaCliente);
+            classDiagram.addElement(imagen);
+            classDiagram.addElement(habitacion);
+            classDiagram.addElement(tipoHabitacion);
+            classDiagram.addElement(categoriaHabitacion);
+            classDiagram.addElement(reservacion);
+            // RELACIONES
+            var asociacion = new UMLAssociation({ a: cliente, b: reservacion });
+            asociacion.setMultiplicityB('1..*');
+            asociacion.setMultiplicityA('     1');
+            classDiagram.addElement(asociacion);
+            var asociacion1 = new UMLAssociation({ a: habitacion, b: imagen });
+            asociacion1.setMultiplicityB('1..*');
+            classDiagram.addElement(asociacion1);
+            var asociacion2 = new UMLAssociation({ a: habitacion, b: tipoHabitacion });
+            asociacion2.setMultiplicityA('*');
+            classDiagram.addElement(asociacion2);
+            var asociacion3 = new UMLAssociation({ a: habitacion, b: reservacion });
+            asociacion3.setMultiplicityA('1..*');
+            asociacion3.setMultiplicityB('      1');
+            classDiagram.addElement(asociacion3);
+            var asociacion4 = new UMLAssociation({ a: cliente, b: tipoCliente });
+            asociacion4.setMultiplicityA('*');
+            classDiagram.addElement(asociacion4);
+
+            var dependencia1 = new UMLDependency({ a: tipoHabitacion, b: categoriaHabitacion })
+            classDiagram.addElement(dependencia1);
+            var dependencia2 = new UMLDependency({ a: tipoCliente, b: categoriaCliente })
+            classDiagram.addElement(dependencia2);
+
+            classDiagram.draw();
+            classDiagram.interaction(true);
+
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-10 m-auto my-5">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Diagrama de clases con jsUML2 (PIM)</strong>
+                </div>
+                <div class="card-body">
+                    <div id="classDiagram"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+@startuml Hotel
+    class Imagen {
+        nombre
+        contenido
+        tipo
+    }
+
+    class Habitacion {
+        nombre
+        precio
+        estado
+    }
+    class TipoHabitacion{
+        nombre
+        descripcion
+        porcentajeDescuento
+    }
+    class Reservacion {
+        fecha
+        fechaInicio
+        numeroDias
+        numeroNoche
+        porcentajeDesc
+        total
+    }
+    class Cliente{
+        RUT
+        nombres
+        apellidos
+        fechaNacimiento
+    }
+    class TipoCliente{
+        nombre
+        descripcion
+        porcentajeDescuento
+    }
+
+    Habitacion -- "1..*" Imagen
+    Habitacion "1..*" -- "1" Reservacion
+    Habitacion "*" -- TipoHabitacion
+    Reservacion "1..*" -- "1" Cliente
+    Cliente "*" -- TipoCliente
+@enduml
